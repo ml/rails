@@ -7,8 +7,8 @@ module ActionDispatch
       # Returns both GET and POST \parameters in a single hash.
       def parameters
         @env["action_dispatch.request.parameters"] ||= begin
-          params = request_parameters.merge(query_parameters)
-          params.merge!(path_parameters)
+          params = request_parameters.deep_merge(query_parameters)
+          params.deep_merge!(path_parameters)
           encode_params(params).with_indifferent_access
         end
       end
